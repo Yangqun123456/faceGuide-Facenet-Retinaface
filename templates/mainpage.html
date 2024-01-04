@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mainpage</title>
+</head>
+
+<body>
+    <!-- {% csrf_token %} -->
+    <input id='file' type="file" name="file">
+    <button id="submit-button">更新</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit-button').click(function () {
+                const formData = $('#file').val()
+                console.log(formData);
+                $.post('http://127.0.0.1:4002/api/addCodeOrganization/', {
+                    name: '展示案例',
+                    project_id: 'X104',
+                    code_zip: formData,
+                }, async function (data) {
+                    if (data.status == 0) {
+                        console.log(data.message);
+                    } else alert(data.message);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
